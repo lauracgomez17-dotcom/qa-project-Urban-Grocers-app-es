@@ -10,7 +10,7 @@ def get_kit_body(kit_name):
 
 #Funcion para obtener el authToken
 def get_new_user_token():
-    response = sender_stand_request.post_new_client_kit(data.user_body)
+    response = sender_stand_request.post_new_user(data.user_body)
     return response.json()["authToken"]
 
 
@@ -71,8 +71,11 @@ def test_create_kit_numbers_in_the_name():
 
 #8 El parámetro no se pasa en la solicitud
 def test_the_parameter_is_not_passed_in_the_request():
-    current_kit_body = get_kit_body({})
+    current_kit_body = get_kit_body(None)
     negative_assert(current_kit_body)
+
+    current_kit_body = data.kit_body.copy()
+    current_kit_body.pop("name")
 
 
 #9 Se ha pasado un tipo de parámetro diferente (número)
